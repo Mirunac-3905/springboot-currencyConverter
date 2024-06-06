@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Currency exchange</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Currency exchange</h1>
+      <form>
+        <input type="hidden" name="q" placeholder="Amount" />
+        <div class="mb-3">
+          <label for="from" class="form-label">Choose a from currency:</label>
+          <select id="from" name="from" class="form-select">
+              <option value="" disabled selected>Select a currency</option>
+              <option th:each="quote : ${quotes}" th:value="${quote}" th:text="${quote}" th:selected="${quote == from}"></option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="from" class="form-label">Choose a to currency:</label>
+          <select name="to" class="form-select">
+            <option value="" disabled selected>Select a currency</option>
+                <option th:each="quote : ${quotes}" th:value="${quote}" th:text="${quote}" th:selected="${quote == to}"></option>
+          </select>
+        <div class="mb-3 mt-4">
+          <button type="submit" class="btn btn-primary">Convert</button>
+        </div>
+      </form>
+      <div th:if="${quote != null}" class="alert alert-primary" role="alert">
+        Converted value is <span th:text="${quote}"></span>
+      </div>
+    </div>
+  </body>
+</html>
