@@ -47,7 +47,10 @@ public class CurrencyService {
 
             String responseBody = response.getResponseBody();
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(responseBody, String.class);
+            double rate = Double.parseDouble(mapper.readValue(responseBody, String.class));
+            double amt = Double.parseDouble(amount);
+            double converted = rate * amt;
+            return String.valueOf(converted);
         } finally {
             client.close();
         }
